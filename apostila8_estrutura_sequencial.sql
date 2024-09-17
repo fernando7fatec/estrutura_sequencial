@@ -60,3 +60,30 @@ BEGIN
 	RAISE NOTICE '20 a 30: %',intTemp20_30;
 END;
 $$
+
+-- 1.4 Faça um programa que gere três valores reais a, b, e c e 
+-- mostre o valor de delta: 
+-- aquele que calculamos para chegar às potenciais raízes de uma equação do segundo grau.
+
+-- formacao geral de uma eq 2o grau
+-- ax + bx + c = 0
+
+-- Delta
+-- b**2 - 4ac
+-- sendo a<>0
+DO
+$$
+DECLARE
+	realA REAL := 2.0;
+	realB REAL := 4.0;
+	realC REAL := 2.0;
+	realDelta REAL;
+BEGIN
+	-- realDelta := ((realB)ˆ2) - (4*(realA)*(realC));
+	-- realDelta := (( realB ˆ 2 ) - (4*( realA )*( realC )));
+	realDelta := (realB ^ 2) - 4*(realA)*(realC);
+	RAISE NOTICE 'delta % ',realDelta;	
+END;
+$$
+
+
