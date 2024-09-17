@@ -36,10 +36,10 @@ $$
 DECLARE 
 	intValorInteiro INTEGER :=1;
 BEGIN
+	-- saida de dados
 	RAISE NOTICE 'Numero inteiro: %',intValorInteiro;
 END;
 $$
-
 
 -- **********************************************
 -- 1.2. Faça um programa que gere um valor 
@@ -48,12 +48,14 @@ $$
 DO
 $$ 
 DECLARE
+	-- entrada 
 	realValorReal REAL :=1.99;
 BEGIN
+	-- processamento e
+	-- saida
 	RAISE NOTICE 'Numero Real: %',realValorReal;
 END;
 $$
-
 
 -- **********************************************
 -- 1.3 Faça um programa que gere um valor 
@@ -83,19 +85,22 @@ $$
 DO
 $$
 DECLARE
+	-- entrada de dados
 	realA REAL := 0.0;
 	realB REAL := 0.0;
 	realC REAL := 0.0;
 	realDelta REAL;
 BEGIN
+	-- processamento dos dados
 	SELECT (floor(random() * (99-1+1) + 1)::int) INTO realA;
 	SELECT (floor(random() * (99-1+1) + 1)::int) INTO realB;
 	SELECT (floor(random() * (99-1+1) + 1)::int) INTO realC;
 	realDelta := (realB ^ 2) - (4*(realA)*(realC));
+	
+	-- saida de dados
 	RAISE NOTICE 'Delta % ',realDelta;	
 END;
 $$
-
 
 -- **********************************************
 -- 1.5 Faça um programa que gere um número 
@@ -106,10 +111,13 @@ $$
 DO 
 $$
 DECLARE
+	-- entrada de dados
 	intRaizCubAntX INT := 0;
 	intRaizQuadSuceX INT := 0;
 	intX INT := 0;
 BEGIN
+	-- processamento
+	-- gera um num inteiro into intX
 	SELECT (random()*100::int) INTO intX;
 	
 	-- extrai a raiz cubica de X - 1
@@ -118,8 +126,9 @@ BEGIN
 	
 	-- calc raiz quadrada do sucessor
 	intRaizQuadSuceX = |/(intX + 1);
+	
+	-- saida de dados
 	RAISE NOTICE ' raiz quadrada do sucessor de % é aproxi.: %',intX,intRaizQuadSuceX;
-
 END;
 $$
 
@@ -144,8 +153,8 @@ DECLARE
 	intValorTerreno INT := 0;
 BEGIN
 	-- Randonicamente gere o tamanho do terreno:
-	-- Considerando medidas de no min 10m e max,
-	-- para frente e fundo
+	-- Considerando medidas de no min 10m e max 40m,
+	-- para frente/fundo
 	
 	-- Gera randonicamente o tam. da frente do terreno.
 	SELECT (floor(random() * (40-10+1) + 10)::int) INTO intFrente;
@@ -181,8 +190,18 @@ $$
 DO 
 $$
 DECLARE
-
+	-- entrada de dados
+	intAnoNascimento INT := 0;
+	intIdadeEmAnos INT := 0;
 BEGIN
-
+	-- Gera um ano randonico entre 1980 e 2000
+	SELECT (floor(random() * (2000-1980+1) + 1980::int) INTO intAnoNascimento);
+	
+	-- Subtrai ano de nascimento - ano atual (2024)
+	intIdadeEmAnos = (2024 - intAnoNascimento);
+	
+	-- saida dos dados
+	RAISE NOTICE 'ANO %',intAnoNascimento;
+	RAISE NOTICE 'Idade da pessoa em 2024 é de % de idade ',intIdadeEmAnos;	
 END;
 $$
