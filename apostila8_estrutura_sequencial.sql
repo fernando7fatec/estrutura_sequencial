@@ -111,13 +111,14 @@ DECLARE
 	intX INT := 0;
 BEGIN
 	SELECT (random()*100::int) INTO intX;
+	
 	-- extrai a raiz cubica de X - 1
 	intRaizCubAntX = ||/(intX - 1);
-	RAISE NOTICE ' raiz cubica do antecessor: %',intRaizCubAntX;
+	RAISE NOTICE ' raiz cubica do antecessor de % é aproxi.: %',intX,intRaizCubAntX;
 	
 	-- calc raiz quadrada do sucessor
-	intRaizQuadSuceX = (intX + 1)ˆ2;
-	RAISE NOTICE ' raiz quadrada sucessor % ',intX,intRaizQuadSuceX;
+	intRaizQuadSuceX = |/(intX + 1);
+	RAISE NOTICE ' raiz quadrada do sucessor de % é aproxi.: %',intX,intRaizQuadSuceX;
 
 END;
 $$
@@ -134,9 +135,36 @@ $$
 DO 
 $$
 DECLARE
-
+	-- SELECT (floor(random() * (30-20+1) + 20)::int) INTO intTemp20_30;
+	-- Tamanhos de um terreno próximo ao real (Brasil)
+	intFrente INT := 0;
+	intFundo INT := 0;
+	intAreaDoTerreno INT := 0;
+	intValorM2 INT := 0;
+	intValorTerreno INT := 0;
 BEGIN
-
+	-- Randonicamente gere o tamanho do terreno:
+	-- Considerando medidas de no min 10m e max,
+	-- para frente e fundo
+	
+	-- Gera randonicamente o tam. da frente do terreno.
+	SELECT (floor(random() * (40-10+1) + 10)::int) INTO intFrente;
+	
+	-- Gera randonicamdente o tam. do fundo do terreno.
+	SELECT (floor(random() * (40-10+1) + 10)::int) INTO intFundo;
+	
+	-- Gera o valor do terreno por m2 entre 60 e 70 
+	SELECT (floor(random() * (70-60+1)+10::int) INTO intValorM2);
+	
+	-- Calcula a área total do terreno
+	intAreaDoTerreno := (intFrente)*(intFundo);
+	
+	-- Calcula o valor total do terreno
+	intValorTerreno = (intValorM2)*(intAreaDoTerreno);
+	
+	RAISE NOTICE 'Terreno frente % , fundo % , Area do Terreno %',intFrente,intFundo,intAreaDoTerreno;
+	RAISE NOTICE 'Preço por M2 é R$%.00 ',intValorM2;
+	RAISE NOTICE 'Valor total do Terreno é R$%.00',intValorTerreno;
 END;
 $$
 
